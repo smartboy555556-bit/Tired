@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Roblox Universe Master Control Matrix</title>
+    <style>
+        body { font-family: 'Segoe UI', sans-serif; background-color: #f4f6f9; margin: 0; padding: 0; }
+        
+        /* 🔐 LOCK ACCESS PIN OVERLAY MENU SCREEN LAYOUT */
+        .login-box { max-width: 400px; margin: 150px auto; background: white; padding: 40px; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); text-align: center; border-top: 5px solid #e74c3c; }
+        .login-box h2 { color: #2c3e50; margin-bottom: 10px; font-size: 24px; }
+        .pin-input { font-size: 24px; letter-spacing: 8px; text-align: center; font-weight: bold; width: 80%; padding: 10px; margin: 20px 0; border: 2px solid #cbd5e0; border-radius: 8px; }
+        .error-text { color: #e74c3c; font-weight: bold; font-size: 14px; margin-bottom: 10px; display: block; }
+        
+        /* CORE PANEL ENGINE WRAPPERS */
+        .sidebar { width: 260px; background-color: #111; color: #fff; height: 100vh; position: fixed; padding: 20px; box-sizing: border-box; }
+        .sidebar h2 { color: #e74c3c; margin-top:0; font-size:22px; text-transform: uppercase; display: flex; align-items: center; gap: 10px; }
+        .main-content { margin-left: 260px; padding: 30px; }
+        header { background-color: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; }
+        header h1 { margin:0; font-size:24px; color:#2c3e50; }
+        .grid { display: grid; grid-template-columns: 2fr 1fr; gap: 30px; }
+        .card { background: white; padding: 25px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); margin-bottom: 25px; }
+        .card h2 { margin-top:0; color:#34495e; border-bottom: 2px solid #ecf0f1; padding-bottom:10px; font-size:18px; }
+        table { width: 100%; border-collapse: collapse; }
+        th, td { text-align: left; padding: 12px; border-bottom: 1px solid #edf2f7; }
+        th { background-color: #f7fafc; color:#718096; }
+        .form-group { margin-bottom: 15px; }
+        input { width: 100%; padding: 12px; border: 1px solid #cbd5e0; border-radius: 6px; box-sizing: border-box; background-color: #f7fafc; }
+        button { background-color: #3182ce; color: white; border: none; padding: 12px; border-radius: 6px; cursor: pointer; font-weight: bold; width: 100%; transition: background 0.2s; }
+        button:hover { background-color: #2b6cb0; }
+        .game-scroll { max-height: 400px; overflow-y: auto; border: 1px solid #edf2f7; border-radius: 6px; }
+        .game-tag { font-size: 13px; color: #718096; background: #edf2f7; padding: 2px 8px; border-radius: 4px; }
+    </style>
+</head>
+<body>
+
+    <!-- REUSABLE 24K GOLD & PLATINUM CLAW-BLADE MEDALLION LOGO -->
+    <svg style="display: none;" xmlns="http://w3.org">
+        <defs>
+            <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#FFE66D"/>
+                <stop offset="50%" stop-color="#FFB703"/>
+                <stop offset="100%" stop-color="#FB8500"/>
+            </linearGradient>
+            <linearGradient id="silverGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#FFFFFF"/>
+                <stop offset="100%" stop-color="#CBD5E1"/>
+            </linearGradient>
+        </defs>
+        <symbol id="prodlox-coin" viewBox="0 0 100 100">
+            <polygon points="50,3 93,27 93,73 50,97 7,73 7,27" fill="url(#goldGrad)"/>
+            <polygon points="50,11 86,31 86,69 50,89 14,69 14,31" fill="#11131A"/>
+            <circle cx="50" cy="50" r="32" fill="none" stroke="#FFD166" stroke-width="2" stroke-opacity="0.45"/>
+            <circle cx="53" cy="21" r="6" fill="none" stroke="#FFD166" stroke-width="3.5"/>
+            <polygon points="49,26 62,28 55,42 50,51 40,50 42,37" fill="url(#silverGrad)"/>
+            <polygon points="50,51 66,46 58,56 64,71 59,86 48,75 41,60" fill="url(#goldGrad)"/>
+            <circle cx="48" cy="51" r="3.5" fill="#EF233C"/>
+        </symbol>
+    </svg>
+
+    {% if display_login %}
+    <!-- 🔐 SECURITY LOGON OVERLAY DIALOG -->
+    <div class="login-box">
+        <svg width="54" height="54" style="margin-bottom: 10px;"><use href="#prodlox-coin"/></svg>
+        <h2>🔒 Security Verification</h2>
+        <p style="color:#7f8c8d; font-size: 14px;">Enter your Master PIN code to open your system control node dashboards.</p>
+        
+        {% if auth_failed %}
+        <span class="error-text">❌ ACCESS DENIED: Invalid Verification PIN</span>
+        {% endif %}
+        
+        <form action="/admin/login" method="POST">
+            <input type="password" name="pin" class="pin-input" maxlength="4" placeholder="••••" required autofocus>
+            <button type="submit" style="background-color: #e74c3c; font-size:16px;">Verify Pin Signature</button>
+        </form>
+    </div>
+    {% else %}
+    
+    <!-- 🔓 AUTHORIZED FULL OPERATIONAL COMMAND CONSOLE PANEL -->
+    <div class="sidebar">
+        <h2>
+            <svg width="32" height="32"><use href="#prodlox-coin"/></svg>
+            Roblox Custom
+        </h2>
+        <p style="color:#2ecc71; font-weight:bold; font-size:12px;">🛡️ Secure PIN Session Verified</p>
+        <hr style="border-color:#222; margin:20px 0;">
+        <p style="color:#fff; font-weight:bold;">● Experience Database</p>
+        <p style="color:#aaa;">● Avatar Marketplace</p>
+        <p style="color:#aaa;">● Cloud Compute Server</p>
+        <a href="/admin/logout" style="color: #e74c3c; text-decoration: none; font-weight: bold; display: block; margin-top: 50px;">[→ Sign Out Hub]</a>
+    </div>
+    <div class="main-content">
+        <header>
+            <h1>Ecosystem Control Node</h1>
+            <div style="background:#e2e8f0; padding:8px 16px; border-radius:6px; font-weight:bold; font-size:14px;">Nigeria Gateway Engine Node (NGN)</div>
+        </header>
+        <div class="grid">
+            <!-- Left Data Column Layout Elements -->
+            <div>
+                <div class="card">
+                    <h2>Active Platform Users</h2>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Username</th>
+                                <th>Email Address</th>
+                                <th>Wallet Balance</th>
+                                <th>Exchange Rate Match</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for u in users %}
+                            <tr>
+                                <td><strong>{{ u['username'] }}</strong></td>
+                                <td>{{ u['username'] }}@prodlox.game</td>
+                                <td style="color:#2f855a; font-weight:bold;">
+                                    <svg width="20" height="20" style="vertical-align: -4px; margin-right: 4px;"><use href="#prodlox-coin"/></svg>
+                                    {{ "{:,}".format(u['coins']) }}
+                                </td>
+                                <td>₦{{ "%.2f"|format(u['coin_rate']) }} / coin</td>
+                            </tr>
+                            {% else %}
+                            <tr>
+                                <td colspan="4" style="text-align:center; color:#718096;">No registered players yet.</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <div class="card">
+                    <h2>Experience Directory Instance Mapping</h2>
+                    <div class="game-scroll">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Game ID Key</th>
+                                    <th>Experience Target Name</th>
+                                    <th>Live Concurrent Metrics</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for g in games %}
+                                <tr>
+                                    <td><code class="game-tag">{{ g['game_id'] }}</code></td>
+                                    <td><strong>{{ g['game_name'] }}</strong></td>
+                                    <td style="color:#e53e3e; font-weight:bold;">🔥 {{ "{:,}".format(g['players']) }} players online</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Right Admin Action Tool Panels Layout Columns -->
+            <div>
+                <div class="card" style="border-top: 4px solid #dd6b20;">
+                    <h2 style="color: #dd6b20;">Inject/Overwrite Wallet Balance</h2>
+                    <form action="/admin/set-balance" method="POST">
+                        <div class="form-group"><input type="text" name="username" placeholder="Target Username" required></div>
+                        <div class="form-group"><input type="number" name="new_balance" placeholder="Set New Coin Total" required></div>
+                        <button type="submit" style="background-color: #dd6b20;">Commit Exact Balance</button>
+                    </form>
+                </div>
+                <div class="card">
+                    <h2>Platform Exchange Control</h2>
+                    <form action="/admin/modify-price" method="POST">
+                        <div class="form-group"><input type="text" name="username" placeholder="Target User Profile" required></div>
